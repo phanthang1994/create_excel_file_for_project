@@ -37,13 +37,13 @@ for row_num, file in enumerate(files, start=1):
         filename, extension = os.path.splitext(file)
 
         # Construct the new filename using formatted datetime
-        worksheet.write(row_num, 0, filename)
-        worksheet.write(row_num, 1, f"chu_de-{filename}-{formatted_datetime}{extension}")
-        worksheet.write(row_num, 2, random.randint(30001, 100000))
-        worksheet.write(row_num, 3, 9)
         new_filename = f"chu_de-{filename}-{formatted_datetime}{extension}"
         new_file_path = os.path.join(folder_path, new_filename)
         os.rename(file_path, new_file_path)
+        worksheet.write(row_num, 0, filename)
+        worksheet.write(row_num, 1, new_filename)
+        worksheet.write(row_num, 2, random.randint(30001, 100000))
+
 
 # Save the workbook
 workbook.close()
