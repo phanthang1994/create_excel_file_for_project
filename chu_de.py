@@ -17,7 +17,7 @@ formatted_datetime = current_datetime.strftime('%d%m%y%H%M%S')
 files = os.listdir(folder_path)
 
 # Create a new Excel workbook and add a worksheet
-output_path = 'filename_info.xlsx'
+output_path = 'chu_de.xlsx'
 workbook = xlsxwriter.Workbook(output_path)
 worksheet = workbook.add_worksheet()
 
@@ -40,7 +40,6 @@ for row_num, file in enumerate(files, start=1):
         worksheet.write(row_num, 0, filename)
         worksheet.write(row_num, 1, f"chu_de-{filename}-{formatted_datetime}{extension}")
         worksheet.write(row_num, 2, random.randint(30001, 100000))
-        worksheet.write(row_num, 3, 9)
         new_filename = f"chu_de-{filename}-{formatted_datetime}{extension}"
         new_file_path = os.path.join(folder_path, new_filename)
         os.rename(file_path, new_file_path)
