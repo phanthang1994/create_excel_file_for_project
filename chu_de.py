@@ -1,6 +1,7 @@
 import random
+import shutil
 
-folder_path = './lesson'
+folder_path = './lesson_'
 
 import os
 import xlsxwriter
@@ -11,13 +12,17 @@ current_datetime = datetime.now()
 
 # Format the datetime as "ddmmyyhms"
 formatted_datetime = current_datetime.strftime('%d%m%y%H%M%S')
+destination_folder_path = f'./new_lesson{formatted_datetime}'
 
+# Create the new folder if it doesn't exist
+if not os.path.exists(destination_folder_path):
+    os.makedirs(destination_folder_path)
 
 # List all files in the directory
 files = os.listdir(folder_path)
 
 # Create a new Excel workbook and add a worksheet
-output_path = 'filename_info.xlsx'
+output_path = 'chu_de_create.xlsx'
 workbook = xlsxwriter.Workbook(output_path)
 worksheet = workbook.add_worksheet()
 
@@ -37,13 +42,13 @@ for row_num, file in enumerate(files, start=1):
         filename, extension = os.path.splitext(file)
 
         # Construct the new filename using formatted datetime
-        new_filename = f"chu_de-{filename}-{formatted_datetime}{extension}"
-        new_file_path = os.path.join(folder_path, new_filename)
-        os.rename(file_path, new_file_path)
         worksheet.write(row_num, 0, filename)
-        worksheet.write(row_num, 1, new_filename)
+        worksheet.write(row_num, 1, f"chu_de-{filename}-{formatted_datetime}{extension}")
         worksheet.write(row_num, 2, random.randint(30001, 100000))
-
+        new_filename = f"chu_de-{filename}-{formatted_datetime}{extension}"
+        # Copy the image to the destination folder with the new filename
+        new_file_path = os.path.join(destination_folder_path, new_filename)
+        shutil.copy(file_path, new_file_path)
 
 # Save the workbook
 workbook.close()
