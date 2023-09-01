@@ -47,6 +47,13 @@ for row_num, file in enumerate(files, start=1):
         worksheet.write(row_num, 1, filename)
         new_filename = f"tu_moi-{filename}-{formatted_datetime}{extension}"
         worksheet.write(row_num, 2, new_filename)
+        worksheet.write(row_num, 3, 'Null')
+        worksheet.write(row_num, 4, 'Null')
+        worksheet.write(row_num, 5, 'Null')
+        worksheet.write(row_num, 6, 'Null')
+        worksheet.write(row_num, 7, 'Null')
+        worksheet.write(row_num, 8, 'Null')
+        worksheet.write(row_num, 9, 'Null')
 
         # Copy the image to the destination folder with the new filename
         new_file_path = os.path.join(study_folder_path, new_filename)

@@ -53,6 +53,10 @@ for row_num, file in enumerate(files, start=1):
 
         worksheet.write(row_num, 2, new_filename)
         worksheet.write(row_num, 3, random.randint(30001, 100000))
+        worksheet.write(row_num, 4, 'Null')
+        worksheet.write(row_num, 5, 'Null')
+        worksheet.write(row_num, 6, 'Null')
+        worksheet.write(row_num, 7, 'Null')
 
 # Save the workbook
 workbook.close()
