@@ -1,8 +1,6 @@
-import random
-
-folder_path = './lesson'
-
 import os
+import shutil
+
 import xlsxwriter
 from datetime import datetime
 
@@ -12,12 +10,18 @@ current_datetime = datetime.now()
 # Format the datetime as "ddmmyyhms"
 formatted_datetime = current_datetime.strftime('%d%m%y%H%M%S')
 
-
 # List all files in the directory
+folder_path = './study_'  # Use the appropriate folder path
+destination_folder_path = f'./new_study_{formatted_datetime}'
+
+# Create the new folder if it doesn't exist
+if not os.path.exists(destination_folder_path):
+    os.makedirs(destination_folder_path)
+
 files = os.listdir(folder_path)
 
 # Create a new Excel workbook and add a worksheet
-output_path = 'tu_moi_info.xlsx'
+output_path = 'tu_moi_create.xlsx'
 workbook = xlsxwriter.Workbook(output_path)
 worksheet = workbook.add_worksheet()
 
@@ -32,7 +36,6 @@ worksheet.write('G1', 'che_tu')
 worksheet.write('H1', 'cau_truc_cau')
 worksheet.write('I1', 'chu_de_id')
 
-
 # Loop through the files and extract name and extension
 for row_num, file in enumerate(files, start=1):
     file_path = os.path.join(folder_path, file)
@@ -40,26 +43,38 @@ for row_num, file in enumerate(files, start=1):
         filename, extension = os.path.splitext(file)
 
         # Construct the new filename using formatted datetime
-        worksheet.write(row_num, 0, filename)
-        worksheet.write(row_num, 1, f"tu_moi-{filename}-{formatted_datetime}{extension}")
         new_filename = f"tu_moi-{filename}-{formatted_datetime}{extension}"
-        new_file_path = os.path.join(folder_path, new_filename)
-        os.rename(file_path, new_file_path)
+        # Copy the image to the destination folder with the new filename
+        new_file_path = os.path.join(destination_folder_path, new_filename)
+        shutil.copy(file_path, new_file_path)
 
-folder_path = './lesson_audio'
-output_path = 'tu_moi_info.xlsx'
+        # Write data to the Excel worksheet
+        worksheet.write(row_num, 0, filename)
+        worksheet.write(row_num, 1, new_filename)
 
-for row_num, file in enumerate(files, start=1):
+# Change folder_path for audio files
+folder_path = './audio_'
+destination_folder_path = f'./new_audio_{formatted_datetime}'
+
+# Create the new folder if it doesn't exist
+if not os.path.exists(destination_folder_path):
+    os.makedirs(destination_folder_path)
+
+# List all audio files in the audio folder
+audio_files = os.listdir(folder_path)
+
+# Loop through the audio files and update worksheet
+for row_num, file in enumerate(audio_files, start=1):
     file_path = os.path.join(folder_path, file)
     if os.path.isfile(file_path):
         filename, extension = os.path.splitext(file)
-        worksheet.write(row_num, 5, f"tu_moi-{filename}-{formatted_datetime}{extension}")
         new_filename = f"tu_moi-{filename}-{formatted_datetime}{extension}"
-        new_file_path = os.path.join(folder_path, new_filename)
-        os.rename(file_path, new_file_path)
+        # Copy the image to the destination folder with the new filename
+        new_file_path = os.path.join(destination_folder_path, new_filename)
+        shutil.copy(file_path, new_file_path)
+        worksheet.write(row_num, 5, new_filename)
 
 # Save the workbook
 workbook.close()
 
 print(f"File names and information saved to {output_path}")
-
