@@ -33,6 +33,7 @@ worksheet.write('C1', 'so_nguoi_theo_hoc')
 worksheet.write('D1', 'category_id')
 worksheet.write('E1', 'description')
 worksheet.write('F1', 'youtube_code')
+worksheet.write('G1', 'status')
 
 
 # Loop through the files and extract name and extension
@@ -45,6 +46,7 @@ for row_num, file in enumerate(files, start=1):
         worksheet.write(row_num, 0, filename)
         worksheet.write(row_num, 1, f"chu_de-{filename}-{formatted_datetime}{extension}")
         worksheet.write(row_num, 2, random.randint(30001, 100000))
+        worksheet.write(row_num, 6, 1)
         new_filename = f"chu_de-{filename}-{formatted_datetime}{extension}"
         # Copy the image to the destination folder with the new filename
         new_file_path = os.path.join(destination_folder_path, new_filename)

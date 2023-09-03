@@ -36,6 +36,7 @@ worksheet.write('G1', 'audio')
 worksheet.write('H1', 'che_tu')
 worksheet.write('I1', 'cau_truc_cau')
 worksheet.write('J1', 'chu_de_id')
+worksheet.write('K1', 'status')
 
 # Loop through the files and extract name and extension
 for row_num, file in enumerate(files, start=1):
@@ -54,6 +55,7 @@ for row_num, file in enumerate(files, start=1):
         worksheet.write(row_num, 7, 'Null')
         worksheet.write(row_num, 8, 'Null')
         worksheet.write(row_num, 9, 'Null')
+        worksheet.write(row_num, 10, 'Null')
 
         # Copy the image to the destination folder with the new filename
         new_file_path = os.path.join(study_folder_path, new_filename)

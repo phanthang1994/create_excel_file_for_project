@@ -35,6 +35,7 @@ worksheet.write('F1', 'audio')
 worksheet.write('G1', 'che_tu')
 worksheet.write('H1', 'cau_truc_cau')
 worksheet.write('I1', 'chu_de_id')
+worksheet.write('J1', 'status')
 
 # Loop through the files and extract name and extension
 for row_num, file in enumerate(files, start=1):

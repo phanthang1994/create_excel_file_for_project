@@ -17,6 +17,7 @@ worksheet.write('D1', 'so_nguoi_theo_hoc')
 worksheet.write('E1', 'category_id')
 worksheet.write('F1', 'description')
 worksheet.write('G1', 'youtube_code')
+worksheet.write('H1', 'status')
 
 # Get the current datetime
 current_datetime = datetime.now()
