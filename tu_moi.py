@@ -39,6 +39,8 @@ worksheet.write('J1', 'status')
 
 # Loop through the files and extract name and extension
 for row_num, file in enumerate(files, start=1):
+    if row_num >47:
+        break
     file_path = os.path.join(folder_path, file)
     if os.path.isfile(file_path):
         filename, extension = os.path.splitext(file)
@@ -66,6 +68,8 @@ audio_files = os.listdir(folder_path)
 
 # Loop through the audio files and update worksheet
 for row_num, file in enumerate(audio_files, start=1):
+    if row_num > 47:
+        break
     file_path = os.path.join(folder_path, file)
     if os.path.isfile(file_path):
         filename, extension = os.path.splitext(file)
